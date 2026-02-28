@@ -62,7 +62,7 @@ interface PlaceHierarchy {
 export const JOURNAL_PK_ID = '8c99e914-8247-40b4-84c1-b72863221273';
 
 //const API_BASE_URL = 'http://localhost:3000'; 
-const API_BASE_URL = 'https://node.tcicerodev.com:3000';
+const API_BASE_URL = 'https://node.whereislyss.com';
 
 /**
  * Get Journal.
