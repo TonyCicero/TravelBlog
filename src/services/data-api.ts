@@ -234,12 +234,14 @@ export async function listNotesByLocation(continent?: string, country?: string, 
  */
 export async function listNotesByTags(tags: string[]): Promise<Note[]> {
   try {
+    const params = new URLSearchParams();
+    params.append("journalPkId", JOURNAL_PK_ID);
+    tags.forEach(tag => params.append("tags", tag));
     const response = await fetch(`${API_BASE_URL}/journal/listNotesByTags`, {
-      method: 'POST',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ journalPkId: JOURNAL_PK_ID, tags }),
     });
 
     if (!response.ok) {
@@ -317,112 +319,132 @@ return {
     continents: {
       "Europe": {
         countries: {
-          "France": { cities: ["Paris", "Lyon", "Marseille"] },
-          "Italy": { cities: ["Rome", "Venice", "Florence"] },
-          "Spain": { cities: ["Barcelona", "Madrid", "Seville"] },
-          "United Kingdom": { cities: ["London", "Manchester", "Edinburgh"] },
-          "Germany": { cities: ["Berlin", "Munich", "Hamburg"] },
-          "Netherlands": { cities: ["Amsterdam", "Rotterdam", "The Hague"] }
+          "France": { cities: ["Lyon"] },
+          "Italy": { cities: ["Venice"] },
+          "Spain": { cities: ["Barcelona", "Madrid", "Seville", "El Camino de Santiago", "LLeida", "Zaragoza", "Valencia", "Cordoba", "Granada", "Malaga", "Cadiz"] },
+          "United Kingdom": { cities: ["London", "Cambridge", "Brighton", "Bristol", "Bath"] },
+          "Germany": { cities: ["Munich"] },
+          "Netherlands": { cities: ["Amsterdam", "Haarlem", "Zaandam", "Zaanse Schans", "Edam"] },
+          "Ireland": { cities: ["Dublin", "Galway"] },
+          "Portugal": { cities: ["Lisbon", "Porto", "Ponta Delgada", "Figueira da Foz", "Coimbra", "Braga", "Tavira", "Faro", "Lagos"] },
+          "Andorra": { cities: ["Andorra la Vella"] },
+          "Switzerland": { cities: ["Zurich"] },
+          "Austria": { cities: ["Vienna", "Salzburg", "Innsbruck"] },
+          "Czech Republic": { cities: ["Prague", "Cesky Krumlov"] },
+          "Poland": { cities: ["Krakow", "Warsaw", "Wroclaw", "Zakopane", "Poznan"] },
+          "Sweden": { cities: ["Malmo"] },
+          "Denmark": { cities: ["Copenhagen", "Helsingor"] },
+          "Slovenia": { cities: ["Ljubljana", "Lake Bled"] },
+          "Slovakia": { cities: ["Bratislava", "Trencin", "Trnava"] },
+          "Greece": { cities: ["Athens", "Rhodes", "Corfu", "Palaiokastritsa"] },
+          "Albania": { cities: ["Saranda"] },
+          "Croatia": { cities: ["Dubrovnik", "Split", "Zagreb", "Plitvice Lakes", "Hvar"] },
+          "Belgium": { cities: ["Brussels", "Bruges", "Ghent"] },
         }
       },
       "Asia": {
         countries: {
-          "Japan": { cities: ["Tokyo", "Kyoto", "Osaka"] },
-          "Thailand": { cities: ["Bangkok", "Chiang Mai", "Phuket"] },
-          "China": { cities: ["Beijing", "Shanghai", "Shenzhen"] },
-          "India": { cities: ["New Delhi", "Mumbai", "Bengaluru"] },
-          "South Korea": { cities: ["Seoul", "Busan", "Incheon"] }
+          "Japan": { cities: ["Tokyo"] },
+          "Thailand": { cities: ["Bangkok", "Chiang Mai", "Chiang Rai"] },
+          "Cambodia": { cities: ["Phnom Penh", "Siem Reap", "Koh Rong"] },
+          "Vietnam": { cities: ["Hanoi", "Ho Chi Minh City", "Nha Trang", "Hoi An", "Hue", "Phong Nha", "Ha Long Bay"] },
+          "Laos": { cities: ["Vientiane", "Luang Prabang", "Vang Vieng"] },
         }
       },
       "North America": {
         countries: {
           "United States": {
             states: {
-              "Alabama": { cities: ["Birmingham", "Montgomery"] },
-              "Alaska": { cities: ["Anchorage", "Juneau"] },
-              "Arizona": { cities: ["Phoenix", "Tucson"] },
-              "Arkansas": { cities: ["Little Rock", "Fayetteville"] },
-              "California": { cities: ["Los Angeles", "San Francisco", "San Diego"] },
-              "Colorado": { cities: ["Denver", "Colorado Springs"] },
-              "Connecticut": { cities: ["Hartford", "New Haven"] },
-              "Delaware": { cities: ["Wilmington", "Dover"] },
-              "Florida": { cities: ["Miami", "Orlando", "Tampa"] },
-              "Georgia": { cities: ["Atlanta", "Savannah"] },
-              "Hawaii": { cities: ["Honolulu", "Hilo"] },
-              "Idaho": { cities: ["Boise", "Idaho Falls"] },
-              "Illinois": { cities: ["Chicago", "Springfield"] },
-              "Indiana": { cities: ["Indianapolis", "Fort Wayne"] },
-              "Iowa": { cities: ["Des Moines", "Cedar Rapids"] },
-              "Kansas": { cities: ["Wichita", "Topeka"] },
-              "Kentucky": { cities: ["Louisville", "Frankfort"] },
-              "Louisiana": { cities: ["New Orleans", "Baton Rouge"] },
-              "Maine": { cities: ["Portland", "Augusta"] },
-              "Maryland": { cities: ["Baltimore", "Annapolis"] },
-              "Massachusetts": { cities: ["Boston", "Worcester"] },
-              "Michigan": { cities: ["Detroit", "Lansing"] },
-              "Minnesota": { cities: ["Minneapolis", "Saint Paul"] },
-              "Mississippi": { cities: ["Jackson", "Gulfport"] },
-              "Missouri": { cities: ["Kansas City", "St. Louis"] },
-              "Montana": { cities: ["Billings", "Helena"] },
-              "Nebraska": { cities: ["Omaha", "Lincoln"] },
-              "Nevada": { cities: ["Las Vegas", "Reno"] },
-              "New Hampshire": { cities: ["Manchester", "Concord"] },
-              "New Jersey": { cities: ["Newark", "Trenton"] },
-              "New Mexico": { cities: ["Albuquerque", "Santa Fe"] },
-              "New York": { cities: ["New York City", "Buffalo", "Albany"] },
-              "North Carolina": { cities: ["Charlotte", "Raleigh"] },
-              "North Dakota": { cities: ["Fargo", "Bismarck"] },
-              "Ohio": { cities: ["Columbus", "Cleveland"] },
-              "Oklahoma": { cities: ["Oklahoma City", "Tulsa"] },
-              "Oregon": { cities: ["Portland", "Salem"] },
-              "Pennsylvania": { cities: ["Philadelphia", "Pittsburgh", "Harrisburg"] },
+              //"Alabama": { cities: ["Birmingham", "Montgomery"] },
+              //"Alaska": { cities: ["Anchorage", "Juneau"] },
+              "Arizona": { cities: ["Grand Canyon"] },
+              //"Arkansas": { cities: ["Little Rock", "Fayetteville"] },
+              "California": { cities: ["Los Angeles", "San Jose", "San Diego", "Santa Cruz"] },
+              //"Colorado": { cities: ["Denver", "Colorado Springs"] },
+              "Connecticut": { cities: ["New Haven"] },
+              //"Delaware": { cities: ["Wilmington", "Dover"] },
+              "Florida": { cities: ["Fort Lauderdale"] },
+              "Georgia": { cities: ["Savannah"] },
+              "Hawaii": { cities: ["Honolulu"] },
+              //"Idaho": { cities: ["Boise", "Idaho Falls"] },
+              "Illinois": { cities: ["Chicago"] },
+              "Indiana": { cities: ["Indianapolis"] },
+              //"Iowa": { cities: ["Des Moines", "Cedar Rapids"] },
+              //"Kansas": { cities: ["Wichita", "Topeka"] },
+              //"Kentucky": { cities: ["Louisville", "Frankfort"] },
+              "Louisiana": { cities: ["New Orleans"] },
+              "Maine": { cities: ["Portland"] },
+              "Maryland": { cities: ["Baltimore", "Annapolis", "Bethesda"] },
+              "Massachusetts": { cities: ["Boston", "Cape Cod"] },
+              //"Michigan": { cities: ["Detroit", "Lansing"] },
+              //"Minnesota": { cities: ["Minneapolis", "Saint Paul"] },
+              //"Mississippi": { cities: ["Jackson", "Gulfport"] },
+              //"Missouri": { cities: ["Kansas City", "St. Louis"] },
+              //"Montana": { cities: ["Billings", "Helena"] },
+              //"Nebraska": { cities: ["Omaha", "Lincoln"] },
+              "Nevada": { cities: ["Las Vegas"] },
+              "New Hampshire": { cities: ["Portsmouth"] },
+              "New Jersey": { cities: ["Newark"] },
+              //"New Mexico": { cities: ["Albuquerque", "Santa Fe"] },
+              "New York": { cities: ["New York City"] },
+              "North Carolina": { cities: ["Asheville"] },
+              //"North Dakota": { cities: ["Fargo", "Bismarck"] },
+              //"Ohio": { cities: ["Columbus", "Cleveland"] },
+              //"Oklahoma": { cities: ["Oklahoma City", "Tulsa"] },
+              "Oregon": { cities: ["Portland", "Cannon Beach"] },
+              "Pennsylvania": { cities: ["Philadelphia"] },
               "Rhode Island": { cities: ["Providence", "Newport"] },
-              "South Carolina": { cities: ["Charleston", "Columbia"] },
-              "South Dakota": { cities: ["Sioux Falls", "Pierre"] },
-              "Tennessee": { cities: ["Nashville", "Memphis"] },
-              "Texas": { cities: ["Houston", "Dallas", "Austin"] },
-              "Utah": { cities: ["Salt Lake City", "Provo"] },
-              "Vermont": { cities: ["Burlington", "Montpelier"] },
-              "Virginia": { cities: ["Virginia Beach", "Richmond"] },
-              "Washington": { cities: ["Seattle", "Spokane"] },
-              "West Virginia": { cities: ["Charleston", "Morgantown"] },
-              "Wisconsin": { cities: ["Milwaukee", "Madison"] },
-              "Wyoming": { cities: ["Cheyenne", "Casper"] },
+              "South Carolina": { cities: ["Charleston", "Myrtle Beach"] },
+              //"South Dakota": { cities: ["Sioux Falls", "Pierre"] },
+              "Tennessee": { cities: ["Nashville"] },
+              "Texas": { cities: ["Austin"] },
+              //"Utah": { cities: ["Salt Lake City", "Provo"] },
+              //"Vermont": { cities: ["Burlington", "Montpelier"] },
+              "Virginia": { cities: ["Norfolk", "Alexandria"] },
+              "Washington": { cities: ["Seattle"] },
+              "West Virginia": { cities: ["Morgantown"] },
+              //"Wisconsin": { cities: ["Milwaukee", "Madison"] },
+              //"Wyoming": { cities: ["Cheyenne", "Casper"] },
               "District of Columbia": { cities: ["Washington"] }
             }
           },
-          "Canada": { cities: ["Toronto", "Vancouver", "Montreal"] }
+          "Canada": { cities: ["Saint John", "Halifax", "Sydney"] },
+          "Mexico": { cities: ["Tijuana", "Cancún"] }
         }
       },
-      "Central America": {
+      "Caribbean": {
         countries: {
-          "Mexico": { cities: ["Mexico City", "Cancún", "Guadalajara"] },
-          "Costa Rica": { cities: ["San José", "Liberia", "Puntarenas"] },
-          "Panama": { cities: ["Panama City", "Colón"] }
+          "Domincian Republic": { cities: ["Punta Cana"] }
         }
       },
-      "South America": {
-        countries: {
-          "Brazil": { cities: ["Rio de Janeiro", "São Paulo", "Salvador"] },
-          "Argentina": { cities: ["Buenos Aires", "Mendoza", "Córdoba"] },
-          "Chile": { cities: ["Santiago", "Valparaíso"] },
-          "Peru": { cities: ["Lima", "Cusco"] }
-        }
-      },
-      "Africa": {
-        countries: {
-          "South Africa": { cities: ["Cape Town", "Johannesburg", "Pretoria"] },
-          "Nigeria": { cities: ["Lagos", "Abuja"] },
-          "Egypt": { cities: ["Cairo", "Alexandria"] },
-          "Kenya": { cities: ["Nairobi", "Mombasa"] }
-        }
-      },
-      "Oceania": {
-        countries: {
-          "Australia": { cities: ["Sydney", "Melbourne", "Brisbane"] },
-          "New Zealand": { cities: ["Auckland", "Wellington", "Christchurch"] }
-        }
-      }
+      // "Central America": {
+      //   countries: {
+      //     "Costa Rica": { cities: ["San José", "Liberia", "Puntarenas"] },
+      //     "Panama": { cities: ["Panama City", "Colón"] }
+      //   }
+      // },
+      // "South America": {
+      //   countries: {
+      //     "Brazil": { cities: ["Rio de Janeiro", "São Paulo", "Salvador"] },
+      //     "Argentina": { cities: ["Buenos Aires", "Mendoza", "Córdoba"] },
+      //     "Chile": { cities: ["Santiago", "Valparaíso"] },
+      //     "Peru": { cities: ["Lima", "Cusco"] }
+      //   }
+      // },
+      // "Africa": {
+      //   countries: {
+      //     "South Africa": { cities: ["Cape Town", "Johannesburg", "Pretoria"] },
+      //     "Nigeria": { cities: ["Lagos", "Abuja"] },
+      //     "Egypt": { cities: ["Cairo", "Alexandria"] },
+      //     "Kenya": { cities: ["Nairobi", "Mombasa"] }
+      //   }
+      // },
+      // "Oceania": {
+      //   countries: {
+      //     "Australia": { cities: ["Sydney", "Melbourne", "Brisbane"] },
+      //     "New Zealand": { cities: ["Auckland", "Wellington", "Christchurch"] }
+      //   }
+      // }
     }
   };
 }
