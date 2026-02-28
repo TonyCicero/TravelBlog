@@ -132,7 +132,7 @@ export function Header({ onNavigate, onCreatePost, onSignIn, user }: HeaderProps
           </div>
 
           {/* Right side - About Me */}
-          <div className="hidden md:flex items-center">
+          <div className="hidden md:flex items-center gap-4">
             <Button
               variant="ghost"
               onClick={() => onNavigate("about")}
@@ -141,13 +141,17 @@ export function Header({ onNavigate, onCreatePost, onSignIn, user }: HeaderProps
               About Me
             </Button>
 
-            <Button
-              variant="ghost"
-              onClick={() => onSignIn()}
-              className="text-white hover:bg-white/20"
-            >
-              Sign In
-            </Button>
+            {!user ? (
+              <Button
+                variant="ghost"
+                onClick={() => onSignIn()}
+                className="text-white hover:bg-white/20"
+              >
+                Sign In
+              </Button>
+              
+            ) : (<span className="text-white">Hello, {user.firstName}</span>)}
+
           </div>
 
           {/* Mobile menu */}
@@ -165,10 +169,12 @@ export function Header({ onNavigate, onCreatePost, onSignIn, user }: HeaderProps
                 <DropdownMenuItem onClick={() => onNavigate("about")}>
                   About Me
                 </DropdownMenuItem>
+                {user ? (
                 <DropdownMenuItem onClick={onCreatePost}>
                   <Plus className="h-4 w-4 mr-2" />
                   New Post
                 </DropdownMenuItem>
+                ) : ('')}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

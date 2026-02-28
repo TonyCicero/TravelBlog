@@ -15,14 +15,15 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "./ui/alert-dialog";
-import { deleteNote, getNote, listNotesByTags, Note, updateNote } from "../services/data-api";
+import { deleteNote, getNote, listNotesByTags, Note, updateNote, User } from "../services/data-api";
 
 interface BlogPostPageProps {
   notePkId: string;
+  user?: User;
   onNavigate: (page: string, data?: any) => void;
 }
 
-export function BlogPostPage({ notePkId, onNavigate }: BlogPostPageProps) {
+export function BlogPostPage({ user, notePkId, onNavigate }: BlogPostPageProps) {
   const [note, setNote] = useState<Note>();
   useState(() => {
     async function fetchData() {
@@ -47,6 +48,16 @@ export function BlogPostPage({ notePkId, onNavigate }: BlogPostPageProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(note?.content || "");
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+
+  let canEdit = false;
+  if (user && note) {
+    canEdit = user.pkId === note.authorPkId || user.isSysAdmin;
+  }
+
+  console.log("notePkId:", notePkId);
+  console.log("Current user:", user);
+  console.log("Note data:", note);
+  console.log("canEdit:", canEdit);
 
   if (!note) {
     return (
@@ -134,7 +145,7 @@ export function BlogPostPage({ notePkId, onNavigate }: BlogPostPageProps) {
           <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-8 border-t-4 border-blue-500">
             {/* Edit Controls */}
             <div className="flex justify-end mb-6 gap-2">
-              {!isEditing ? (
+              {!isEditing && canEdit ? (
                 <>
                   <Button
                     variant="outline"
@@ -153,7 +164,7 @@ export function BlogPostPage({ notePkId, onNavigate }: BlogPostPageProps) {
                     Delete
                   </Button>
                 </>
-              ) : (
+              ) : isEditing ? (
                 <div className="flex gap-2">
                   <Button
                     variant="outline"
@@ -171,7 +182,7 @@ export function BlogPostPage({ notePkId, onNavigate }: BlogPostPageProps) {
                     Save
                   </Button>
                 </div>
-              )}
+              ) : ''}
             </div>
 
             {/* Content */}

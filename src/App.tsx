@@ -57,6 +57,7 @@ export default function App() {
         return (
           <BlogPostPage
             notePkId={pageState.data?.notePkId}
+            user={currentUser}
             onNavigate={handleNavigate}
           />
         );
@@ -88,7 +89,7 @@ export default function App() {
       <footer className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white border-t">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
-            <p className="text-lg">© 2024 Wanderlust Chronicles. All rights reserved.</p>
+            <p className="text-lg">© 2026 Wanderlust Chronicles. All rights reserved.</p>
             <p className="mt-2 text-white/90">Exploring the world, one story at a time. ✈️🌍📸</p>
           </div>
         </div>
