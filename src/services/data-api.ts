@@ -237,7 +237,7 @@ export async function listNotesByTags(tags: string[]): Promise<Note[]> {
     const params = new URLSearchParams();
     params.append("journalPkId", JOURNAL_PK_ID);
     tags.forEach(tag => params.append("tags", tag));
-    const response = await fetch(`${API_BASE_URL}/journal/listNotesByTags`, {
+    const response = await fetch(`${API_BASE_URL}/journal/listNotesByTags?${params}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
