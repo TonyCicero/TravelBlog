@@ -28,6 +28,7 @@ export function BlogPostPage({ user, notePkId, onNavigate }: BlogPostPageProps) 
   useState(() => {
     async function fetchData() {
       const noteData = await getNote(notePkId);
+      setEditedContent(noteData.content);
       setNote(noteData);
     }
     fetchData();

@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { ImageWithFallback } from "./ui/ImageWithFallback";
 import { listNotesByLocation, Note } from "../services/data-api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface PlacesPageProps {
   filter?: {
@@ -18,13 +18,13 @@ interface PlacesPageProps {
 export function PlacesPage({ filter, onNavigate }: PlacesPageProps) {
 
   const [notes, setNotes] = useState<Note[]>([]);
-  useState(() => {
+  useEffect(() => {
     async function fetchData() {
       const notesData = await listNotesByLocation(filter?.continent, filter?.country, filter?.state, filter?.city);
       setNotes(notesData);
     }
     fetchData();
-  });
+  }, [filter]);
 
   const getTitle = () => {
     if (filter?.city) return filter.city;
