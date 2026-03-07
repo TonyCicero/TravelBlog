@@ -48,10 +48,10 @@ export function PlacesPage({ filter, onNavigate }: PlacesPageProps) {
     const endDate = new Date(end);
     
     if (start === end) {
-      return startDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      return startDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
     }
     
-    return `${startDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${endDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+    return `${startDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' })} - ${endDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}`;
   };
 
   return (

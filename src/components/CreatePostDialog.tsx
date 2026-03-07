@@ -330,10 +330,10 @@ export function CreatePostDialog({ open, onOpenChange, onPostCreated }: CreatePo
               {formData.tags.map(tag => (
                 <Badge key={tag} variant="secondary" className="gap-1">
                   {tag}
-                  <X
+                  <Button variant="ghost" size="icon"
                     className="h-3 w-3 cursor-pointer"
                     onClick={() => handleRemoveTag(tag)}
-                  />
+                  ><X className="h-3 w-3" /></Button>
                 </Badge>
               ))}
             </div>

@@ -91,13 +91,13 @@ export function BlogPostPage({ user, notePkId, onNavigate }: BlogPostPageProps) 
   const formatDateRange = (start: string, end: string) => {
     const startDate = new Date(start);
     const endDate = new Date(end);
-    const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric', year: 'numeric' };
+    const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' };
     
     if (start === end) {
       return startDate.toLocaleDateString('en-US', options);
     }
     
-    return `${startDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} - ${endDate.toLocaleDateString('en-US', options)}`;
+    return `${startDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' })} - ${endDate.toLocaleDateString('en-US', options)}`;
   };
 
 

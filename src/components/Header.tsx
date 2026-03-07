@@ -38,12 +38,12 @@ export function Header({ onNavigate, onCreatePost, onSignIn, user }: HeaderProps
           <div className="flex items-center gap-2">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="text-white hover:bg-white/20">
+                <Button variant="ghost" className="cursor-pointer text-white hover:bg-white/20">
                   Places Visited
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="w-56">
-                <DropdownMenuItem onClick={() => onNavigate("places")}>
+                <DropdownMenuItem className="cursor-pointer" onClick={() => onNavigate("places")}>
                   All Places
                 </DropdownMenuItem>
                 
@@ -51,7 +51,7 @@ export function Header({ onNavigate, onCreatePost, onSignIn, user }: HeaderProps
                   <DropdownMenuSub key={continent}>
                     <DropdownMenuSubTrigger>{continent}</DropdownMenuSubTrigger>
                     <DropdownMenuSubContent className="w-56">
-                      <DropdownMenuItem 
+                      <DropdownMenuItem className="cursor-pointer"
                         onClick={() => onNavigate("places", { continent })}
                       >
                         All {continent}
@@ -61,7 +61,7 @@ export function Header({ onNavigate, onCreatePost, onSignIn, user }: HeaderProps
                         <DropdownMenuSub key={country}>
                           <DropdownMenuSubTrigger>{country}</DropdownMenuSubTrigger>
                           <DropdownMenuSubContent className="w-56">
-                            <DropdownMenuItem 
+                            <DropdownMenuItem className="cursor-pointer"
                               onClick={() => onNavigate("places", { continent, country })}
                             >
                               All {country}
@@ -72,7 +72,7 @@ export function Header({ onNavigate, onCreatePost, onSignIn, user }: HeaderProps
                                 <DropdownMenuSub key={state}>
                                   <DropdownMenuSubTrigger>{state}</DropdownMenuSubTrigger>
                                   <DropdownMenuSubContent className="w-56">
-                                    <DropdownMenuItem 
+                                    <DropdownMenuItem className="cursor-pointer"
                                       onClick={() => onNavigate("places", { continent, country, state })}
                                     >
                                       All {state}
@@ -81,6 +81,7 @@ export function Header({ onNavigate, onCreatePost, onSignIn, user }: HeaderProps
                                     {stateData.cities.map(city => (
                                       <DropdownMenuItem 
                                         key={city}
+                                        className="cursor-pointer"
                                         onClick={() => onNavigate("places", { continent, country, state, city })}
                                       >
                                         {city}
@@ -91,7 +92,7 @@ export function Header({ onNavigate, onCreatePost, onSignIn, user }: HeaderProps
                               ))
                             ) : (
                               countryData.cities?.map(city => (
-                                <DropdownMenuItem 
+                                <DropdownMenuItem className="cursor-pointer"
                                   key={city}
                                   onClick={() => onNavigate("places", { continent, country, city })}
                                 >
@@ -113,7 +114,7 @@ export function Header({ onNavigate, onCreatePost, onSignIn, user }: HeaderProps
               <Button
                   variant="ghost"
                   onClick={onCreatePost}
-                  className="hidden md:flex text-white hover:bg-white/20 gap-2"
+                  className="cursor-pointer hidden md:flex text-white hover:bg-white/20 gap-2"
                 >
                   <Plus className="h-4 w-4" />
                   New Post
@@ -136,7 +137,7 @@ export function Header({ onNavigate, onCreatePost, onSignIn, user }: HeaderProps
             <Button
               variant="ghost"
               onClick={() => onNavigate("about")}
-              className="text-white hover:bg-white/20"
+              className="cursor-pointer text-white hover:bg-white/20"
             >
               About Me
             </Button>
@@ -145,7 +146,7 @@ export function Header({ onNavigate, onCreatePost, onSignIn, user }: HeaderProps
               <Button
                 variant="ghost"
                 onClick={() => onSignIn()}
-                className="text-white hover:bg-white/20"
+                className="cursor-pointer text-white hover:bg-white/20"
               >
                 Sign In
               </Button>
